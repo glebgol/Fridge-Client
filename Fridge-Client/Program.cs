@@ -5,10 +5,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddHttpClient<IProductHttpClient, ProductHttpClient>(client =>
 {
     client.BaseAddress = new Uri("https://localhost:7248/api/products");
 });
+
+builder.Services.AddHttpClient<IFridgeModelHttpClient, FridgeModelHttpClient>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7248/api/fridge-models");
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
