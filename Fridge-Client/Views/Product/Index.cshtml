@@ -1,0 +1,29 @@
+﻿@model ICollection<Fridge_Client.Models.Product>
+@{
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                DefaultQuantity
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefaultQuantity)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
