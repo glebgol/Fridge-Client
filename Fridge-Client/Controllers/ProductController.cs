@@ -1,4 +1,5 @@
 ﻿using Fridge_Client.Interfaces;
+using Fridge_Client.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fridge_Client.Controllers
@@ -17,6 +18,12 @@ namespace Fridge_Client.Controllers
             var result = productHttpClient.GetAllProducts();
             var lst = result.Result;
             return View(lst);
+        }
+
+        public IActionResult Create(Product product)
+        {
+            productHttpClient.CreateProduct(product);
+            return View(product);
         }
     }
 }
