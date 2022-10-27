@@ -14,14 +14,14 @@ namespace Fridge_Client.Clients
 
         public HttpResponseMessage CreateProduct(Product product)
         {
-            //product.Id = new Guid();
-            var result = _httpClient.PostAsJsonAsync<Product>("", product);
+            var result = _httpClient.PostAsJsonAsync("", product);
             return result.Result;
         }
 
         public HttpResponseMessage DeleteProduct(Guid id)
         {
-            throw new NotImplementedException();
+            var result = _httpClient.DeleteAsync($"/{id}");
+            return result.Result;
         }
 
         public Task<ICollection<Product>> GetAllProducts()
