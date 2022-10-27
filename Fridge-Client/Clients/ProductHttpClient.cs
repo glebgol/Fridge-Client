@@ -12,10 +12,10 @@ namespace Fridge_Client.Clients
             _httpClient = httpClient;
         }
 
-        public async Task<HttpResponseMessage> CreateProduct(Product product)
+        public HttpResponseMessage CreateProduct(Product product)
         {
-            var result = await _httpClient.PostAsJsonAsync<Product>("", product);
-            return result;
+            var result = _httpClient.PostAsJsonAsync<Product>("", product);
+            return result.Result;
         }
 
         public Task<ICollection<Product>> GetAllProducts()

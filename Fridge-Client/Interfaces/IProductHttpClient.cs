@@ -5,6 +5,6 @@ namespace Fridge_Client.Interfaces
     public interface IProductHttpClient
     {
         Task<ICollection<Product>> GetAllProducts();
-        Task<HttpResponseMessage> CreateProduct(Product product);
+        HttpResponseMessage CreateProduct(Product product);
     }
 }

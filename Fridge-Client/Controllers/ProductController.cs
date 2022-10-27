@@ -20,9 +20,19 @@ namespace Fridge_Client.Controllers
             return View(lst);
         }
 
-        public IActionResult Create(Product product)
+        public IActionResult Create()
         {
-            productHttpClient.CreateProduct(product);
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                productHttpClient.CreateProduct(product);
+                return RedirectToAction(nameof(Index));
+            }
             return View(product);
         }
     }
