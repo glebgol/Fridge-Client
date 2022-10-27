@@ -20,13 +20,20 @@ namespace Fridge_Client.Clients
 
         public HttpResponseMessage DeleteProduct(Guid id)
         {
-            var result = _httpClient.DeleteAsync($"/{id}");
+            var result = _httpClient.DeleteAsync(_httpClient.BaseAddress + $"/{id}");
             return result.Result;
         }
 
         public Task<ICollection<Product>> GetAllProducts()
         {
-            return _httpClient.GetFromJsonAsync<ICollection<Product>>("");
+            var result = _httpClient.GetFromJsonAsync<ICollection<Product>>("");
+            return result;
+        }
+
+        public Task<Product> GetProductById(Guid id)
+        {
+            var result = _httpClient.GetFromJsonAsync<Product>(_httpClient.BaseAddress + $"/{id}");
+            return result;
         }
     }
 }

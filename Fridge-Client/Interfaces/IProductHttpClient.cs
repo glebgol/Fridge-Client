@@ -7,5 +7,6 @@ namespace Fridge_Client.Interfaces
         Task<ICollection<Product>> GetAllProducts();
         HttpResponseMessage CreateProduct(Product product);
         HttpResponseMessage DeleteProduct(Guid id);
+        Task<Product> GetProductById(Guid id);
     }
 }

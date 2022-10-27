@@ -35,5 +35,18 @@ namespace Fridge_Client.Controllers
             }
             return View(product);
         }
+
+        public IActionResult Delete(Guid id)
+        {
+            var product = productHttpClient.GetProductById(id);
+            return View(product.Result);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            productHttpClient.DeleteProduct(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
