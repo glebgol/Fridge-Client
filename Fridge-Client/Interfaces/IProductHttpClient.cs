@@ -12,6 +12,5 @@ namespace Fridge_Client.Interfaces
         Task<HttpResponseMessage> DeleteProduct(Guid id);
 
         Task<HttpResponseMessage> UpdateProduct(Guid id, Product product);
-
     }
 }
