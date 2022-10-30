@@ -30,7 +30,7 @@ namespace Fridge_Client.Controllers
         {
             if (ModelState.IsValid)
             {
-                productHttpClient.CreateProduct(product);
+                await productHttpClient.CreateProduct(product);
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
@@ -39,13 +39,14 @@ namespace Fridge_Client.Controllers
         public IActionResult Delete(Guid id)
         {
             var product = productHttpClient.GetProductById(id);
+            product.Wait();
             return View(product.Result);
         }
 
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            productHttpClient.DeleteProduct(id);
+            await productHttpClient.DeleteProduct(id);
             return RedirectToAction(nameof(Index));
         }
     }
