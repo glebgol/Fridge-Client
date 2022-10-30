@@ -49,5 +49,27 @@ namespace Fridge_Client.Controllers
             await productHttpClient.DeleteProduct(id);
             return RedirectToAction(nameof(Index));
         }
+
+        //public IActionResult Edit(Guid id)
+        //{
+        //    var responseTask = productHttpClient.GetProductById(id);
+        //    var product = responseTask.Result;
+        //    return View(product);
+        //}
+
+        public async Task<IActionResult> Edit(Guid id, Product product)
+        {
+            if (id != product.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await productHttpClient.UpdateProduct(id, product);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(product);
+        }
     }
 }

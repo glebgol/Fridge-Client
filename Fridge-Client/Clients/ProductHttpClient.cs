@@ -38,7 +38,7 @@ namespace Fridge_Client.Clients
 
         public Task<HttpResponseMessage> UpdateProduct(Guid id, Product product)
         {
-            var result = _httpClient.PutAsJsonAsync(_httpClient.BaseAddress + $"/{id}", new { Name = product.Name, DefaultQuantity = product.DefaultQuantity });
+            var result = _httpClient.PutAsJsonAsync(_httpClient.BaseAddress + $"/{id}", product);
             return result;
         }
     }
