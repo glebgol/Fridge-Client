@@ -1,4 +1,5 @@
 ﻿using Fridge_Client.Interfaces;
+using Fridge_Client.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fridge_Client.Controllers
@@ -16,6 +17,22 @@ namespace Fridge_Client.Controllers
         {
             var result = await fridgeHttpClient.GetAllFridgeModels();
             return View(result);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(FridgeModel fridgeModel)
+        {
+            if (ModelState.IsValid)
+            {
+                await fridgeHttpClient.CreateFridgeModel(fridgeModel);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(fridgeModel);
         }
     }
 }
