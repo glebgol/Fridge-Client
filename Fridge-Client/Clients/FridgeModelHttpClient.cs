@@ -12,19 +12,20 @@ namespace Fridge_Client.Clients
             _httpClient = httpClient;
         }
 
-        public Task<HttpResponseMessage> CreateFridgeModel(FridgeModel fridgeModel)
+        public async Task<HttpResponseMessage> CreateFridgeModel(FridgeModel fridgeModel)
         {
             throw new NotImplementedException();
         }
 
-        public Task<HttpResponseMessage> DeleteFridgeModel(Guid id)
+        public async Task<HttpResponseMessage> DeleteFridgeModel(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<FridgeModel>> GetAllFridgeModels()
+        public async Task<IEnumerable<FridgeModel>> GetAllFridgeModels()
         {
-            return _httpClient.GetFromJsonAsync<IEnumerable<FridgeModel>>(_httpClient.BaseAddress);
+            var result = await _httpClient.GetFromJsonAsync<IEnumerable<FridgeModel>>(_httpClient.BaseAddress);
+            return result;
         }
 
         public Task<FridgeModel> GetFridgeModel(Guid id)
