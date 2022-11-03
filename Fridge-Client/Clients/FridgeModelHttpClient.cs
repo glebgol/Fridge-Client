@@ -14,12 +14,14 @@ namespace Fridge_Client.Clients
 
         public async Task<HttpResponseMessage> CreateFridgeModel(FridgeModel fridgeModel)
         {
-            throw new NotImplementedException();
+            var result = await _httpClient.PostAsJsonAsync("", fridgeModel);
+            return result;
         }
 
         public async Task<HttpResponseMessage> DeleteFridgeModel(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await _httpClient.DeleteAsync($"/{id}");
+            return result;
         }
 
         public async Task<IEnumerable<FridgeModel>> GetAllFridgeModels()
@@ -28,14 +30,16 @@ namespace Fridge_Client.Clients
             return result;
         }
 
-        public Task<FridgeModel> GetFridgeModel(Guid id)
+        public async Task<FridgeModel> GetFridgeModel(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await _httpClient.GetFromJsonAsync<FridgeModel>($"/{id}");
+            return result;
         }
 
-        public Task<HttpResponseMessage> UpdateFridgeModel(Guid id, FridgeModel fridgeModel)
+        public async Task<HttpResponseMessage> UpdateFridgeModel(Guid id, FridgeModel fridgeModel)
         {
-            throw new NotImplementedException();
+            var result = await _httpClient.PutAsJsonAsync($"/{id}", fridgeModel);
+            return result;
         }
     }
 }

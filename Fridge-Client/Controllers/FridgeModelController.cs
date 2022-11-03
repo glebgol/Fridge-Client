@@ -12,11 +12,10 @@ namespace Fridge_Client.Controllers
             this.fridgeHttpClient = fridgeHttpClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var result = fridgeHttpClient.GetAllFridgeModels();
-            var lst = result.Result;
-            return View(lst);
+            var result = await fridgeHttpClient.GetAllFridgeModels();
+            return View(result);
         }
     }
 }

@@ -13,11 +13,10 @@ namespace Fridge_Client.Controllers
             this.productHttpClient = productHttpClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var result = productHttpClient.GetAllProducts();
-            var lst = result.Result;
-            return View(lst);
+            var result = await productHttpClient.GetAllProducts();
+            return View(result);
         }
 
         public IActionResult Create()
@@ -36,11 +35,10 @@ namespace Fridge_Client.Controllers
             return View(product);
         }
 
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var product = productHttpClient.GetProductById(id);
-            product.Wait();
-            return View(product.Result);
+            var product = await productHttpClient.GetProductById(id);
+            return View(product);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -49,13 +47,6 @@ namespace Fridge_Client.Controllers
             await productHttpClient.DeleteProduct(id);
             return RedirectToAction(nameof(Index));
         }
-
-        //public IActionResult Edit(Guid id)
-        //{
-        //    var responseTask = productHttpClient.GetProductById(id);
-        //    var product = responseTask.Result;
-        //    return View(product);
-        //}
 
         public async Task<IActionResult> Edit(Guid id, Product product)
         {
