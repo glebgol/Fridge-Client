@@ -6,16 +6,16 @@ namespace Fridge_Client.Controllers
 {
     public class FridgeModelController : Controller
     {
-        private readonly IFridgeModelHttpClient fridgeHttpClient;
+        private readonly IFridgeModelHttpClient fridgeModelHttpClient;
 
-        public FridgeModelController(IFridgeModelHttpClient fridgeHttpClient)
+        public FridgeModelController(IFridgeModelHttpClient fridgeModelHttpClient)
         {
-            this.fridgeHttpClient = fridgeHttpClient;
+            this.fridgeModelHttpClient = fridgeModelHttpClient;
         }
 
         public async Task<IActionResult> Index()
         {
-            var result = await fridgeHttpClient.GetAllFridgeModels();
+            var result = await fridgeModelHttpClient.GetAllFridgeModels();
             return View(result);
         }
 
@@ -29,10 +29,23 @@ namespace Fridge_Client.Controllers
         {
             if (ModelState.IsValid)
             {
-                await fridgeHttpClient.CreateFridgeModel(fridgeModel);
+                await fridgeModelHttpClient.CreateFridgeModel(fridgeModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(fridgeModel);
+        }
+
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await fridgeModelHttpClient.GetFridgeModel(id);
+            return View(result);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            await fridgeModelHttpClient.DeleteFridgeModel(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

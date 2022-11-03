@@ -20,7 +20,7 @@ namespace Fridge_Client.Clients
 
         public async Task<HttpResponseMessage> DeleteProduct(Guid id)
         {
-            var result = await _httpClient.DeleteAsync(_httpClient.BaseAddress + $"/{id}");
+            var result = await _httpClient.DeleteAsync($"{_httpClient.BaseAddress}/{id}");
             return result;
         }
 
@@ -32,13 +32,13 @@ namespace Fridge_Client.Clients
 
         public async Task<Product?> GetProductById(Guid id)
         {
-            var result = await _httpClient.GetFromJsonAsync<Product>(_httpClient.BaseAddress + $"/{id}");
+            var result = await _httpClient.GetFromJsonAsync<Product>($"{_httpClient.BaseAddress}/{id}");
             return result;
         }
 
         public async Task<HttpResponseMessage> UpdateProduct(Guid id, Product product)
         {
-            var result = await _httpClient.PutAsJsonAsync(_httpClient.BaseAddress + $"/{id}", product);
+            var result = await _httpClient.PutAsJsonAsync($"{_httpClient.BaseAddress}/{id}", product);
             return result;
         }
     }
